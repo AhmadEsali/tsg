@@ -1,3 +1,4 @@
+import AppHeader from 'components/Global/AppHeader';
 import { DashboardLayoutWrapper, MainContent } from './dashboardLayout.styles';
 import 'react-responsive-modal/styles.css';
 
@@ -9,6 +10,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
   // states
   return (
     <DashboardLayoutWrapper>
+      <AppHeader />
       <MainContent>{children}</MainContent>
     </DashboardLayoutWrapper>
   );

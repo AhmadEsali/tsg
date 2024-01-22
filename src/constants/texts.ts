@@ -11,4 +11,5 @@ export const Texts: { [key: string]: string } = {
   usernamePlaceholder: 'Nutzername',
   passwordPlaceholder: 'Password',
   forgotPassword: 'Forgot Password?',
+  tourAnlegen: 'Tour Anlegen',
 };

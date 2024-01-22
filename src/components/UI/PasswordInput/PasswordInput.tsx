@@ -34,7 +34,7 @@ const PasswordInput = ({
       </Label>
       <Input
         type={inputType}
-        placeholder={placeHolder}
+        placeholder={Texts[placeHolder]}
         {...register('password', {
           required: 'Password is required',
         })}

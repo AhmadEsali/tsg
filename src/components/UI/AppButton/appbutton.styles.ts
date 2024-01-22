@@ -17,13 +17,13 @@ const LG = css``;
 
 const PRIMARY = css`
   background-color: rgb(var(--nblue-13));
-  border: 1px solid var(--Blue-blue-400, #6791fd);
+  border: 1px solid var(--blue-400, #6791fd);
 
   color: #ffffff;
   border: none;
 
   &:hover {
-    background-color: rgb(var(--nblue-12));
+    background-color: rgb(var(--blue-600));
   }
 `;
 

@@ -1,5 +1,12 @@
+import HomeContainer from 'components/Home/HomeContainer';
+import DashboardLayout from 'layouts/DashboardLayout';
+
 const Home = () => {
-  return <div>home</div>;
+  return (
+    <DashboardLayout>
+      <HomeContainer />
+    </DashboardLayout>
+  );
 };
 
 export default Home;
