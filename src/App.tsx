@@ -10,6 +10,7 @@ import PublicOutlet from 'helpers/PublicOutlet';
 
 import Home from 'pages/Home';
 import { Route, Routes } from 'react-router-dom';
+import Login from 'pages/auth/Login';
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         <Route element={<PrivateOutlet />} path='/dashboard'></Route>
 
         {/* temporarily */}
-        <Route element={<PublicOutlet />}></Route>
+        <Route element={<PublicOutlet />}>
+          <Route path='/login' element={<Login />} />
+        </Route>
       </Routes>
     </Suspense>
   );

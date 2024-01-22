@@ -16,12 +16,14 @@ const XS = css``;
 const LG = css``;
 
 const PRIMARY = css`
-  background-color: rgb(var(--purple));
+  background-color: rgb(var(--nblue-13));
+  border: 1px solid var(--Blue-blue-400, #6791fd);
+
   color: #ffffff;
   border: none;
 
   &:hover {
-    background-color: rgb(var(--purple-700));
+    background-color: rgb(var(--nblue-12));
   }
 `;
 
@@ -75,10 +77,10 @@ export const StyledButton = styled.button<{
     variant === 'secondary'
       ? SECONDARY
       : variant === 'outline'
-      ? OUTLINE
-      : variant === 'text'
-      ? TEXT
-      : PRIMARY};
+        ? OUTLINE
+        : variant === 'text'
+          ? TEXT
+          : PRIMARY};
 
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
 

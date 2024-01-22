@@ -2,7 +2,7 @@ import { ReactSVG } from 'react-svg';
 import classnames from 'classnames';
 
 const iconGenerator =
-  (iconSrc: any) =>
+  (iconSrc: string) =>
   ({ id = '', className = '' }) => {
     const iconClasses = classnames({
       icon: true,

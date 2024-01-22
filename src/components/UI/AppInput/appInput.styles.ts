@@ -12,23 +12,20 @@ export const Input = styled.input<{ hasError: boolean }>`
   font-size: 1.6rem;
   font-weight: 400;
 
-  color: rgb(var(--nn-nn-10));
+  color: rgb(var(--navy-9));
   border: ${({ hasError }) =>
-    hasError ? '1.5px solid rgb(var(--red))' : '1px solid rgb(var(--light-grey-500))'};
+    hasError ? '1.5px solid rgb(var(--red))' : '1px solid rgb(var(--navy-5))'};
   border-radius: 8px;
   padding: 13px 16px;
 
   //style the placeholder
   &::placeholder {
-    color: rgb(var(--nn-nn-7));
+    color: rgb(var(--navy-7));
   }
 
   &:focus-visible {
     outline: none;
-    border: 1.5px solid rgb(var(--purple));
-  }
-  &:not(:placeholder-shown) {
-    border: 1.5px solid rgb(var(--purple));
+    border: 1.5px solid rgb(var(--navy-5));
   }
 
   ${space};
@@ -37,14 +34,13 @@ export const Input = styled.input<{ hasError: boolean }>`
 `;
 
 export const Label = styled.label`
-  color: rgb(var(--nn-nn-9));
+  color: rgb(var(--navy-9));
   font-size: 1.6rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 140%;
   margin-bottom: 8px;
   display: block;
-  font-family: var(--secondary-font);
 
   span {
     color: rgb(var(--red));

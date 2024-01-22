@@ -13,7 +13,7 @@ interface buttonProps {
   disabled?: boolean;
   loader?: boolean;
   fullWidth?: boolean;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 const AppButton: React.FC<buttonProps> = ({
   children,

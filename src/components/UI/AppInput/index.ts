@@ -1,1 +1,1 @@
-export { default } from "./AppInput";
+export { default } from './AppInput';

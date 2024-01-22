@@ -24,7 +24,7 @@ export const Heading1 = styled.h1<TypographyProps>`
 `;
 
 export const Heading2 = styled.h2<TypographyProps>`
-  font-size: 1.8rem;
+  font-size: ${(props) => props.size || '1.8rem'};
   font-weight: ${({ weight }) => (weight ? weight : 600)};
 
   text-transform: ${({ transform }) => (transform ? transform : 'none')};
@@ -75,7 +75,7 @@ export const Heading5 = styled.h5<TypographyProps>`
 `;
 
 export const Heading6 = styled.h5<TypographyProps>`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: ${({ weight }) => (weight ? weight : 400)};
   text-transform: ${({ transform }) => (transform ? transform : 'none')};
   font-family: ${({ font }) => (font ? `var(--${font})` : 'var(--main-font)')};

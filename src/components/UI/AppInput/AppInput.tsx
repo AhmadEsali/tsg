@@ -13,7 +13,7 @@ interface inputProps {
   defaultValue?: string;
   placeHolder?: string;
   fullWidth?: boolean;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 
 const AppInput = ({
@@ -31,10 +31,7 @@ const AppInput = ({
   console.log(errors);
   return (
     <InputContainer fullWidth={fullWidth}>
-      <Label>
-        {Texts[label]}
-        {required && <span>*</span>}
-      </Label>
+      <Label>{Texts[label]}</Label>
       <Input
         type={type}
         {...register(name, {

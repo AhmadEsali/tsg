@@ -1,8 +1,9 @@
 import { ErrorWrapper, Input, InputContainer, Label } from './passwordinput.styles';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { DeepRequired, FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Texts } from 'constants/texts';
+import { PasswordHide, PasswordShow } from 'components/icons';
 
 interface passwordProps {
   register: UseFormRegister<FieldValues>;
@@ -39,7 +40,9 @@ const PasswordInput = ({
         })}
         hasError={Object.keys(errors).length > 0 && errors['password'] ? true : false}
       />
-      <button onClick={handlePasswordView}>{inputType === 'text' ? 'show' : 'hide'}</button>
+      <button onClick={handlePasswordView}>
+        {inputType === 'text' ? <PasswordShow /> : <PasswordHide />}
+      </button>
       {Object.keys(errors).length > 0 && errors['password'] ? (
         <ErrorWrapper>
           <ErrorMessage errors={errors} name='password' as='p' />

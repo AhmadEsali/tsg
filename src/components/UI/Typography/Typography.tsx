@@ -18,7 +18,7 @@ interface TypographyProps {
   size?: string;
   font?: string;
   additionalStyles?: React.CSSProperties;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 
 const Typography: React.FC<TypographyProps> = ({
