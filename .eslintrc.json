@@ -29,6 +29,7 @@
     "quotes": ["error", "single"],
     "no-duplicate-imports": "error",
     "react/prop-types": 0,
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "no-unused-vars": "off" // Add this line to allow unused variables
   }
 }

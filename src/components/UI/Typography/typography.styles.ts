@@ -74,7 +74,7 @@ export const Heading5 = styled.h5<TypographyProps>`
   ${space};
 `;
 
-export const Heading6 = styled.h5<TypographyProps>`
+export const Heading6 = styled.h6<TypographyProps>`
   font-size: 1.2rem;
   font-weight: ${({ weight }) => (weight ? weight : 400)};
   text-transform: ${({ transform }) => (transform ? transform : 'none')};
