@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import AppLink from 'components/UI/AppLink';
 import AppButton from 'components/UI/AppButton';
 import LogoWhite from 'assets/img/logo-white.png';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const {
     register,
@@ -22,8 +23,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
   const handleFormSubmit = (data) => {
     console.log(data);
+    navigate('/');
   };
 
   return (
