@@ -12,4 +12,8 @@ export const Texts: { [key: string]: string } = {
   passwordPlaceholder: 'Password',
   forgotPassword: 'Forgot Password?',
   tourAnlegen: 'Tour Anlegen',
+  tourPlaceHolder: 'e.g. Z01',
+  tourName: 'Tour Name',
+  cancel: 'Cancel',
+  save: 'Save',
 };

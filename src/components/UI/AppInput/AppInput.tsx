@@ -28,7 +28,6 @@ const AppInput = ({
   fullWidth = false,
   ...rest
 }: inputProps) => {
-  console.log(errors);
   return (
     <InputContainer fullWidth={fullWidth}>
       <Label>{Texts[label]}</Label>

@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import {
   CardHover,
   ColumnCard,
@@ -9,9 +10,30 @@ import {
 } from './cardsContainer.styles';
 import Typography from 'components/UI/Typography';
 
-const Card = () => {
+const Card = ({ setOpenCardInfo, id, setSelectedCards, selectedCards }) => {
+  //   console.log('🚀 ~ Card ~ id:', id);
+  //   const [selectedCard, setSelectedCard] = useState(false);
+  const handleDoubleClick = () => {
+    console.log('double click');
+    setOpenCardInfo(true);
+  };
+
+  const handleClick = () => {
+    console.log('click');
+    console.log(id);
+    if (selectedCards.includes(id)) {
+      setSelectedCards((prev) => prev.filter((card) => card !== id));
+      return;
+    }
+    setSelectedCards((prev) => [...prev, id]);
+  };
   return (
-    <ColumnCard>
+    <ColumnCard
+      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
+      selected={selectedCards.includes(id)}
+      key={id}
+    >
       <Typography variant='h6' color='navy-7'>
         13:30 Jan 20, 2024
       </Typography>

@@ -3,8 +3,14 @@ import styled from 'styled-components';
 export const CardsWrapper = styled.div`
   padding: 24px 0 64px 64px;
   display: flex;
+  flex-direction: column;
   gap: 8px;
   align-items: stretch;
+`;
+
+export const ColumnsWrapper = styled.div`
+  display: flex;
+  gap: 8px;
 `;
 
 export const TourColumn = styled.div`
@@ -38,9 +44,8 @@ export const TourItem = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 22.4px */
-  &:not(:last-child) {
-    margin-bottom: 95px;
-  }
+  cursor: pointer;
+  margin-bottom: 95px;
 `;
 
 export const SortableColumns = styled.div`
@@ -77,7 +82,9 @@ export const CardHover = styled.div`
   right: 50%;
 `;
 
-export const ColumnCard = styled.div`
+export const ColumnCard = styled.div<{
+  selected: boolean;
+}>`
   display: flex;
   padding: 8px 12px;
   flex-direction: column;
@@ -87,12 +94,12 @@ export const ColumnCard = styled.div`
   border-radius: 8px;
   background: #fff;
   position: relative;
-  &:hover {
+  border: ${({ selected }) => (selected ? '2px solid rgb(var(--nblue-13))' : 'none')};
+  /* &:hover {
     ${CardHover} {
-      /* display: block; */
       opacity: 1;
     }
-  }
+  } */
 `;
 
 export const HoverTitle = styled.div`
@@ -129,4 +136,32 @@ export const HoverDescription = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+`;
+
+export const SelectionWrapper = styled.div`
+  border-radius: 100px;
+  padding: 16px 24px;
+  background: rgb(var(--nblue-5));
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`;
+
+export const GroupButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const CloseButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
 `;

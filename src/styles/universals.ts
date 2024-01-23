@@ -35,7 +35,7 @@ export default css`
   }
 
   .app-modal {
-    max-width: 1200px;
+    max-width: 1400px;
     padding: 32px !important;
     border-radius: 16px;
     box-shadow: none !important ;

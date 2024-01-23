@@ -4,7 +4,7 @@ import { AddButton, HomeHeaderWrapper, NavigationContainer } from './homeHeader.
 import { Texts } from 'constants/texts';
 import { Add, ArrowLeft, ArrowRight } from 'components/icons';
 
-const HomeHeader = () => {
+const HomeHeader = ({ setOpen }) => {
   return (
     <HomeHeaderWrapper>
       <NavigationContainer>
@@ -23,7 +23,7 @@ const HomeHeader = () => {
       <Typography variant='h3' color='nblue-1' opacity={0.8}>
         Use the arrows to switch back and forth through the days
       </Typography>
-      <AddButton>
+      <AddButton onClick={setOpen}>
         <Add />
         {Texts['tourAnlegen']}
       </AddButton>

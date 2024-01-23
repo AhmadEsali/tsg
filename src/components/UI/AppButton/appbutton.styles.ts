@@ -38,8 +38,8 @@ const TEXT = css`
 `;
 
 const SECONDARY = css`
-  background-color: rgb(var(--lighter-grey));
-  color: rgb(var(--blue));
+  background-color: #f0f7fa;
+  color: #0473b0;
   border: none;
 `;
 
@@ -85,7 +85,7 @@ export const StyledButton = styled.button<{
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
 
   &:disabled {
-    background-color: rgb(var(--light-grey-700));
+    background-color: rgb(var(--navy-7));
     color: white;
   }
   div.loader {
