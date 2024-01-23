@@ -8,10 +8,12 @@ import {
   TitleTag,
   ValueItem,
 } from './cardsContainer.styles';
+
 import Typography from 'components/UI/Typography';
 
 const Card = ({ setOpenCardInfo, id, setSelectedCards, selectedCards }) => {
-  //   console.log('🚀 ~ Card ~ id:', id);
+  console.log('🚀 ~ Card ~ selectedCards:', selectedCards);
+  console.log('🚀 ~ Card ~ id:', id);
   //   const [selectedCard, setSelectedCard] = useState(false);
   const handleDoubleClick = () => {
     console.log('double click');

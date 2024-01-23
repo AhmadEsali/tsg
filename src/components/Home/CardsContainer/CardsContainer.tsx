@@ -5,20 +5,22 @@ import {
   ColumnsWrapper,
   GroupButton,
   SelectionWrapper,
+  SortableColumn,
   SortableColumns,
   TourColumn,
   TourColumnHeader,
   TourItem,
 } from './cardsContainer.styles';
 
-import React, { useState } from 'react';
-import Column from './Column';
+import { useState } from 'react';
+// import Column from './Column';
 import EditTourModal from 'components/Modals/EditTourModal';
 import CardInfoModal from 'components/Modals/CardInfoModal';
 import { CloseIcon, FolderAdd } from 'components/icons';
 import Typography from 'components/UI/Typography';
+import Card from './Card';
 
-const WeekDays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+// const WeekDays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 const CardsContainer = (tours) => {
   const [open, setOpen] = useState(false);
   const [openCardInfo, setOpenCardInfo] = useState(false);
@@ -62,28 +64,216 @@ const CardsContainer = (tours) => {
             : null}
         </TourColumn>
         <SortableColumns>
-          {React.Children.toArray(
-            WeekDays.map((day, index) => (
-              <Column
-                index={index}
-                setOpenCardInfo={setOpenCardInfo}
-                day={day}
-                setSelectedCards={setSelectedCards}
-                selectedCards={selectedCards}
-              />
-            )),
-          )}
-          {React.Children.toArray(
-            WeekDays.map((day, index) => (
-              <Column
-                index={index + 20}
-                setOpenCardInfo={setOpenCardInfo}
-                day={day}
-                setSelectedCards={setSelectedCards}
-                selectedCards={selectedCards}
-              />
-            )),
-          )}
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Montag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={0}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={1}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={2}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={3}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Dienstag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={4}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={5}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={6}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={7}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Mittwoch
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={8}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={9}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={10}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={11}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Donnerstag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={12}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={13}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={14}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={15}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Freitag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={16}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={17}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={18}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={19}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Samstag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={20}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={21}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={22}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={23}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
+          <SortableColumn>
+            <Typography variant='h2' color='navy-13' weight={700}>
+              Sonntag
+            </Typography>
+
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={24}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={25}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={26}
+              selectedCards={selectedCards}
+            />
+            <Card
+              setOpenCardInfo={setOpenCardInfo}
+              setSelectedCards={setSelectedCards}
+              id={27}
+              selectedCards={selectedCards}
+            />
+          </SortableColumn>
         </SortableColumns>
       </ColumnsWrapper>
       <EditTourModal

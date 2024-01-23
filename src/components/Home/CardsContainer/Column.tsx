@@ -1,7 +1,9 @@
 import Typography from 'components/UI/Typography';
 import { SortableColumn } from './cardsContainer.styles';
 import Card from './Card';
-const Column = ({ day, setOpenCardInfo, setSelectedCards, selectedCards, index }) => {
+import { v4 as uuidv4 } from 'uuid';
+
+const Column = ({ day, setOpenCardInfo, setSelectedCards, selectedCards }) => {
   return (
     <SortableColumn>
       <Typography variant='h2' color='navy-13' weight={700}>
@@ -11,25 +13,25 @@ const Column = ({ day, setOpenCardInfo, setSelectedCards, selectedCards, index }
       <Card
         setOpenCardInfo={setOpenCardInfo}
         setSelectedCards={setSelectedCards}
-        id={day + index + 1}
+        id={uuidv4()}
         selectedCards={selectedCards}
       />
       <Card
         setOpenCardInfo={setOpenCardInfo}
         setSelectedCards={setSelectedCards}
-        id={day + index + 2}
+        id={uuidv4()}
         selectedCards={selectedCards}
       />
       <Card
         setOpenCardInfo={setOpenCardInfo}
         setSelectedCards={setSelectedCards}
-        id={day + index + 3}
+        id={uuidv4()}
         selectedCards={selectedCards}
       />
       <Card
         setOpenCardInfo={setOpenCardInfo}
         setSelectedCards={setSelectedCards}
-        id={day + index + 4}
+        id={uuidv4()}
         selectedCards={selectedCards}
       />
     </SortableColumn>

@@ -95,11 +95,11 @@ export const ColumnCard = styled.div<{
   background: #fff;
   position: relative;
   border: ${({ selected }) => (selected ? '2px solid rgb(var(--nblue-13))' : 'none')};
-  /* &:hover {
+  &:hover {
     ${CardHover} {
       opacity: 1;
     }
-  } */
+  }
 `;
 
 export const HoverTitle = styled.div`
