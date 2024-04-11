@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LoginPoster from 'assets/img/login-page-image.jpeg';
+import { media } from 'styles/utils';
 
 export const LoginContainer = styled.div`
   display: grid;
@@ -20,6 +21,10 @@ export const ImageContainer = styled.div`
   align-items: flex-start;
   padding: 135px 131px 0 104px;
   gap: 3em;
+
+  ${media('medium')} {
+    display: none;
+  }
 `;
 
 export const SocialContainer = styled.div`

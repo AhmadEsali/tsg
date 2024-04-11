@@ -11,6 +11,7 @@ import { Texts } from 'constants/texts';
 import Typography from 'components/UI/Typography';
 import AppButton from 'components/UI/AppButton';
 import {
+  DeleteButton,
   ErrorWrapper,
   Input,
   Label,
@@ -18,6 +19,8 @@ import {
   ModalContent,
   ModalFooter,
 } from '../NewTourModal/newTourModal.styles';
+import { authAPI } from 'api/auth';
+import toast from 'react-hot-toast';
 
 const EditTourModal = ({ setOpen, open, setTours, selectedTour = null }) => {
   // states
@@ -39,6 +42,21 @@ const EditTourModal = ({ setOpen, open, setTours, selectedTour = null }) => {
     }
   }, [selectedTour]);
 
+  const handleDeleteTour = async () => {
+    try {
+      const response = await authAPI.deleteTour(selectedTour.id);
+      if (response.status !== 200) {
+        toast.error('Error deleting tour');
+        return;
+      }
+
+      setTours((prev) => prev.filter((tour) => tour.id !== selectedTour.id));
+      setOpen(false);
+    } catch (error) {
+      toast.error('Error deleting tour');
+    }
+  };
+
   const submitData = async () => {
     setIsSubmitting(true);
     if (!tourName) {
@@ -47,22 +65,32 @@ const EditTourModal = ({ setOpen, open, setTours, selectedTour = null }) => {
     }
 
     // get the id of the tour and update teh name
-    setTours((prev) => {
-      const updatedTours = prev.map((tour) => {
-        if (tour.id === selectedTour.id) {
-          return { ...tour, name: tourName };
-        }
-        return tour;
-      });
-      return updatedTours;
-    });
 
-    setTimeout(() => {
+    try {
+      const response = await authAPI.updateTours(tourName, selectedTour.id);
+      if (response.status !== 200 || !response.data.data) {
+        toast.error('Error updating tour');
+        return;
+      }
+
+      setTours((prev) => {
+        const updatedTours = prev.map((tour) => {
+          if (tour.id === selectedTour.id) {
+            return { ...tour, name: tourName };
+          }
+          return tour;
+        });
+        return updatedTours;
+      });
+
       setTourName('');
       setHasError(false);
-      setIsSubmitting(false);
       setOpen(false);
-    }, 500);
+    } catch (error) {
+      toast.error('Error updating tour');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <Modal
@@ -99,6 +127,7 @@ const EditTourModal = ({ setOpen, open, setTours, selectedTour = null }) => {
           ) : null}
         </ModalContent>
         <ModalFooter>
+          <DeleteButton onClick={handleDeleteTour}>{Texts['delete']}</DeleteButton>
           <AppButton variant='secondary' size='sm' onClick={() => setOpen(false)}>
             {Texts['cancel']}
           </AppButton>

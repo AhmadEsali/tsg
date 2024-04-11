@@ -2,7 +2,7 @@ import axios from 'axios';
 import store, { persistor } from 'store';
 
 const axiosParams = {
-  baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://tsg.test/api/v1/',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

@@ -5,10 +5,9 @@ import {
   ImageContainer,
   LoginContainer,
   LoginFormContainer,
-  SocialContainer,
 } from './login.styles';
 import { Texts } from 'constants/texts';
-import { CopyRight, Facebook, Instagram, Linkedin, Twitter } from 'components/icons';
+import { CopyRight } from 'components/icons';
 import AppInput from 'components/UI/AppInput';
 import PasswordInput from 'components/UI/PasswordInput';
 import { useForm } from 'react-hook-form';
@@ -16,17 +15,39 @@ import AppLink from 'components/UI/AppLink';
 import AppButton from 'components/UI/AppButton';
 import LogoWhite from 'assets/img/logo-white.png';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAppDispatch } from 'store';
+import { login } from 'store/slices/auth';
+import toast from 'react-hot-toast';
+
 const Login = () => {
+  const [submitLoading, setSubmitLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // hooks
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleFormSubmit = (data) => {
-    console.log(data);
-    navigate('/');
+    setSubmitLoading(true);
+    dispatch(login(data))
+      .unwrap()
+      .then((response) => {
+        console.log('🚀 ~ file: LoginForm.tsx:60 ~ .then ~ response:', response.metaData);
+        if (response?.metaData?.status === 200) {
+          navigate('/');
+        }
+      })
+      .catch((error) => {
+        console.log('🚀 ~ handleFormSubmit ~ error:', error);
+        toast.error(error?.response?.data?.metaData?.message || 'Something went wrong');
+      })
+      .finally(() => setSubmitLoading(false));
   };
 
   return (
@@ -36,23 +57,7 @@ const Login = () => {
         <Typography variant='h1' size='2.4rem' color='nblue-1' weight={400}>
           {Texts['loginText']}
         </Typography>
-        <SocialContainer>
-          <a href='https://www.facebook.com' target='_blank' rel='noreferrer'>
-            <Facebook />
-          </a>
 
-          <a href='https://www.instagram.com' target='_blank' rel='noreferrer'>
-            <Instagram />
-          </a>
-
-          <a href='https://www.twitter.com' target='_blank' rel='noreferrer'>
-            <Twitter />
-          </a>
-
-          <a href='https://www.linkedin.com' target='_blank' rel='noreferrer'>
-            <Linkedin />
-          </a>
-        </SocialContainer>
         <CopyRightContainer>
           <CopyRight />
           <Typography variant='h6' color='nblue-1'>
@@ -96,7 +101,9 @@ const Login = () => {
             {Texts['forgotPassword']}
           </AppLink>
 
-          <AppButton>{Texts['login']}</AppButton>
+          <AppButton loader={submitLoading} disabled={submitLoading}>
+            {Texts['login']}
+          </AppButton>
         </Form>
       </LoginFormContainer>
     </LoginContainer>

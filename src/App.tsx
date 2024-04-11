@@ -18,9 +18,9 @@ function App() {
       <ScrollToTop />
       <GlobalStyles />
       <Routes>
-        <Route path='/' element={<Home />} />
-
-        <Route element={<PrivateOutlet />} path='/dashboard'></Route>
+        <Route element={<PrivateOutlet />} path='/'>
+          <Route path='/' element={<Home />} />
+        </Route>
 
         {/* temporarily */}
         <Route element={<PublicOutlet />}>

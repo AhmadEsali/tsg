@@ -74,17 +74,43 @@ export const CardHover = styled.div`
   box-shadow: 4px 4px 30px 0px rgba(16, 18, 24, 0.1);
   backdrop-filter: blur(25px);
   width: 286px;
-  transition: opacity 0.9s ease-in-out; /* Add a smooth transition effect */
-  opacity: 0; /* Start with opacity set to 0 */
+
   position: absolute;
   z-index: 9;
   bottom: 100%;
   right: 50%;
 `;
 
+export const CardActions = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out; /* Add a smooth transition effect */
+`;
+export const ShowInfo = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+`;
+
+export const SwapCard = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+`;
+
 export const ColumnCard = styled.div<{
-  selected: boolean;
+  selected?: boolean;
 }>`
+  position: relative;
   display: flex;
   padding: 8px 12px;
   flex-direction: column;
@@ -96,7 +122,7 @@ export const ColumnCard = styled.div<{
   position: relative;
   border: ${({ selected }) => (selected ? '2px solid rgb(var(--nblue-13))' : 'none')};
   &:hover {
-    ${CardHover} {
+    ${CardActions} {
       opacity: 1;
     }
   }

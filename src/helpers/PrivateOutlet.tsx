@@ -3,6 +3,7 @@ import { useAppSelector } from 'store';
 
 const PrivateOutlet = () => {
   const isAuthenticated = useAppSelector((state) => state.auth?.authenticated);
+  console.log('🚀 ~ PrivateOut ~ isAuthenticated:', isAuthenticated);
 
   return isAuthenticated ? (
     <>

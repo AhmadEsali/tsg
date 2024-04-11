@@ -12,25 +12,88 @@ import {
   TourItem,
 } from './cardsContainer.styles';
 
-import { useState } from 'react';
-// import Column from './Column';
+import { useEffect, useState } from 'react';
 import EditTourModal from 'components/Modals/EditTourModal';
 import CardInfoModal from 'components/Modals/CardInfoModal';
 import { CloseIcon, FolderAdd } from 'components/icons';
 import Typography from 'components/UI/Typography';
-import Card from './Card';
+// import Card from './Card';
+import SwapCardModal from 'components/Modals/SwapCardModal';
+import { authAPI } from 'api/auth';
+import { DndContext, PointerSensor, closestCorners, useSensor, useSensors } from '@dnd-kit/core';
+import Column from './Column';
+import { format } from 'date-fns';
 
-// const WeekDays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
-const CardsContainer = (tours) => {
+// const WeekDays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'];
+
+const CardsContainer = ({ tours, setTours, firstDate, lastDate }) => {
   const [open, setOpen] = useState(false);
   const [openCardInfo, setOpenCardInfo] = useState(false);
+  const [openSwapModal, setOpenSwapModal] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [missions, setMissions] = useState([]);
+
+  useEffect(() => {
+    fetchMissions();
+  }, [firstDate, lastDate]);
 
   const handleEditTour = (id: string) => {
-    const tour = tours.tours.find((tour) => tour.id === id);
+    const tour = tours.find((tour) => tour.id === id);
     setSelectedTour(tour);
     setOpen(true);
+  };
+
+  const fetchMissions = async () => {
+    try {
+      const fDate = format(firstDate, 'yyyy-MM-dd');
+      const lDate = format(lastDate, 'yyyy-MM-dd');
+      const response = await authAPI.getMissions(fDate, lDate);
+      console.log('🚀 ~ fetchMissions ~ response:', response.data);
+      if (response.status === 200) {
+        setMissions(response.data.data ? response.data.data : []);
+        // const modifiedData = {};
+
+        // console.log(Object.entries(response.data.data));
+
+        // Object.entries(response.data.data).forEach(([key, value]) => {
+        //   // covert the key to day
+        //   const date = new Date(key);
+        //   const day = date.toLocaleDateString('de-DE', { weekday: 'long' });
+
+        //   modifiedData[day] = value;
+        // });
+        // console.log('🚀 ~ missions=Object.entries ~ missions:', modifiedData);
+        // setMissions(modifiedData)
+      }
+    } catch (error) {
+      console.log('🚀 ~ fetchTours ~ error:', error);
+    }
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
+  );
+
+  const handleDragend = (event) => {
+    console.log('🚀 ~ handleDragend ~ event:', event);
+    const { active, over } = event;
+    if (over && active.id === over.id) {
+      return;
+    }
+
+    const activeIndex = missions.findIndex((mission) => mission.id === active.id);
+    const overIndex = missions.findIndex((mission) => mission.id === over.id);
+    const newMissions = [...missions];
+    newMissions.splice(activeIndex, 1);
+    newMissions.splice(overIndex, 0, missions[activeIndex]);
+    setMissions(newMissions);
   };
   return (
     <CardsWrapper>
@@ -55,234 +118,62 @@ const CardsContainer = (tours) => {
       <ColumnsWrapper>
         <TourColumn>
           <TourColumnHeader>Tour</TourColumnHeader>
-          {tours.tours.length > 0
-            ? tours.tours.map((tour) => (
+          {tours.length > 0
+            ? tours.map((tour) => (
                 <TourItem onClick={() => handleEditTour(tour.id)} key={tour.id}>
                   {tour.name}
                 </TourItem>
               ))
             : null}
         </TourColumn>
-        <SortableColumns>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Montag
-            </Typography>
-
-            <Card
+        <DndContext collisionDetection={closestCorners} onDragEnd={handleDragend} sensors={sensors}>
+          <SortableColumns>
+            <Column
+              day='Montag'
               setOpenCardInfo={setOpenCardInfo}
               setSelectedCards={setSelectedCards}
-              id={0}
               selectedCards={selectedCards}
+              setOpenSwapModal={setOpenSwapModal}
+              missions={missions}
+              setSelectedCard={setSelectedCard}
+              ddddd={'first'}
             />
-            <Card
+            <Column
+              day='Dienstag'
               setOpenCardInfo={setOpenCardInfo}
               setSelectedCards={setSelectedCards}
-              id={1}
               selectedCards={selectedCards}
+              setOpenSwapModal={setOpenSwapModal}
+              missions={missions}
+              setSelectedCard={setSelectedCard}
+              ddddd={'Dienstag'}
             />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={2}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={3}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Dienstag
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={4}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={5}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={6}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={7}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Mittwoch
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={8}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={9}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={10}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={11}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Donnerstag
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={12}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={13}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={14}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={15}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Freitag
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={16}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={17}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={18}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={19}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Samstag
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={20}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={21}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={22}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={23}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-          <SortableColumn>
-            <Typography variant='h2' color='navy-13' weight={700}>
-              Sonntag
-            </Typography>
-
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={24}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={25}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={26}
-              selectedCards={selectedCards}
-            />
-            <Card
-              setOpenCardInfo={setOpenCardInfo}
-              setSelectedCards={setSelectedCards}
-              id={27}
-              selectedCards={selectedCards}
-            />
-          </SortableColumn>
-        </SortableColumns>
+            <SortableColumn>
+              <Typography variant='h2' color='navy-13' weight={700}>
+                Mittwoch
+              </Typography>
+            </SortableColumn>
+            <SortableColumn>
+              <Typography variant='h2' color='navy-13' weight={700}>
+                Donnerstag
+              </Typography>
+            </SortableColumn>
+            <SortableColumn>
+              <Typography variant='h2' color='navy-13' weight={700}>
+                Freitag
+              </Typography>
+            </SortableColumn>
+          </SortableColumns>
+        </DndContext>
       </ColumnsWrapper>
       <EditTourModal
         open={open}
         setOpen={setOpen}
-        setTours={tours.setTours}
+        setTours={setTours}
         selectedTour={selectedTour}
       />
-      <CardInfoModal open={openCardInfo} setOpen={setOpenCardInfo} />
+      <CardInfoModal open={openCardInfo} setOpen={setOpenCardInfo} selectedCard={selectedCard} />
+      <SwapCardModal open={openSwapModal} setOpen={setOpenSwapModal} selectedCard={selectedCard} />
     </CardsWrapper>
   );
 };

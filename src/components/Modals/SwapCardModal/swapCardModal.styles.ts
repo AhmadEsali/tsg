@@ -25,7 +25,7 @@ export const InputContainer = styled.div`
   max-width: 100%;
 `;
 
-export const Input = styled.input<{ hasError: boolean }>`
+export const Input = styled.input<{ hasError?: boolean }>`
   width: 100%;
   font-size: 1.6rem;
   font-weight: 400;
@@ -81,14 +81,4 @@ export const ErrorWrapper = styled.div`
     font-style: normal;
     font-weight: 400;
   }
-`;
-
-export const DeleteButton = styled.button`
-  background: none;
-  border: none;
-  color: rgb(var(--red));
-  font-size: 1.6rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-right: auto;
 `;

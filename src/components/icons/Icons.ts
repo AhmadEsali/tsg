@@ -14,6 +14,7 @@ import ArrowRightSVG from 'assets/icons/arrow-right.svg';
 import LinkSVG from 'assets/icons/link.svg';
 import CloseSVG from 'assets/icons/close.svg';
 import FolderAddSVG from 'assets/icons/folder-add.svg';
+import SwapSVG from 'assets/icons/swap.svg';
 // exports
 export const Logo = IconGenerator(LogoSVG);
 export const PasswordHide = IconGenerator(PasswordHideSVG);
@@ -31,3 +32,4 @@ export const ArrowRight = IconGenerator(ArrowRightSVG);
 export const LinkIcon = IconGenerator(LinkSVG);
 export const CloseIcon = IconGenerator(CloseSVG);
 export const FolderAdd = IconGenerator(FolderAddSVG);
+export const Swap = IconGenerator(SwapSVG);
